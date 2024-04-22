@@ -90,6 +90,3 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true
 
-
-configurations:
-- params.yaml
