@@ -5,25 +5,29 @@ resources:
   - ../overlays/odh
 
 namespace: opendatahub
-configMapGenerator:
-  - envs:
-      - params.env
-    name: odh-model-controller-parameters
 generatorOptions:
   disableNameSuffixHash: true
 
-vars:
-  - fieldref:
-      fieldPath: metadata.namespace
-    name: mesh-namespace
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: odh-model-controller-parameters
-  - fieldref:
-      fieldPath: data.odh-model-controller
-    name: odh-model-controller
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: odh-model-controller-parameters
+replacements:
+- source:
+    fieldPath: metadata.namespace
+    kind: ConfigMap
+    name: odh-model-controller-parameters
+    version: v1
+  targets:
+    - select:
+        kind: ClusterRoleBinding
+      options:
+        delimiter: '-'
+        index: 4
+- source:
+    fieldPath: data.odh-model-controller
+    kind: ConfigMap
+    name: odh-model-controller-parameters
+    version: v1
+  targets:
+    - select:
+        kind: Deployment
+        name: odh-model-controller
+      fieldPaths:
+        - spec.template.spec.containers.0.image

@@ -2,8 +2,8 @@ resources:
 - ../../crd/external
 - ../../default
 
-patchesStrategicMerge:
-- odh_model_controller_manager_patch.yaml
+patches:
+  - path: odh_model_controller_manager_patch.yaml
 
 namespace: default
 configMapGenerator:
@@ -13,18 +13,28 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true
 
-vars:
-- fieldref:
-    fieldPath: metadata.namespace
-  name: mesh-namespace
-  objref:
-    apiVersion: v1
-    kind: ConfigMap
-    name: odh-model-controller-parameters
-- fieldref:
-    fieldPath: data.monitoring-namespace
-  name: monitoring-namespace
-  objref:
-    apiVersion: v1
-    kind: ConfigMap
-    name: odh-model-controller-parameters
+replacements:
+  - source:
+      fieldPath: metadata.namespace
+      kind: ConfigMap
+      name: odh-model-controller-parameters
+      version: v1
+    targets:
+    - select:
+        kind: ClusterRoleBinding
+      reject:
+        - name: proxy-rolebinding
+      options:
+        delimiter: '-'
+        index: 4
+  - source:
+      fieldPath: data.monitoring-namespace
+      kind: ConfigMap
+      name: odh-model-controller-parameters
+      version: v1
+    targets:
+      - select:
+          kind: Deployment
+          name: odh-model-controller
+        fieldPaths:
+            - spec.template.spec.containers.*.env.[name=MONITORING_NS].value
