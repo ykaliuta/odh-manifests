@@ -18,4 +18,4 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: modelmesh-servingruntime.serving.kserve.io
   annotations:
-    cert-manager.io/inject-ca-from: $(CERTIFICATE_NAMESPACE_PLACEHOLDER)/$(CERTIFICATE_NAME_PLACEHOLDER)
+    cert-manager.io/inject-ca-from: CERTIFICATE_NAMESPACE_PLACEHOLDER_PLACEHOLDER/CERTIFICATE_NAME_PLACEHOLDER_PLACEHOLDER

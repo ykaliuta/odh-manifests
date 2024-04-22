@@ -12,54 +12,81 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-vars:
-  - fieldref:
-      fieldPath: metadata.namespace
-    name: CERTIFICATE_NAMESPACE_PLACEHOLDER
-    objref:
-      group: cert-manager.io
-      kind: Certificate
-      name: modelmesh-webhook-server-cert
-      version: v1
-  - fieldref: {}
-    name: CERTIFICATE_NAME_PLACEHOLDER
-    objref:
-      group: cert-manager.io
-      kind: Certificate
-      name: modelmesh-webhook-server-cert
-      version: v1
-  - fieldref:
-      fieldPath: metadata.namespace
-    name: SERVICE_NAMESPACE_PLACEHOLDER
-    objref:
-      kind: Service
-      name: modelmesh-webhook-server-service
-      version: v1
-  - fieldref: {}
-    name: SERVICE_NAME_PLACEHOLDER
-    objref:
-      kind: Service
-      name: modelmesh-webhook-server-service
-      version: v1
 
 configMapGenerator:
-  - files:
-      - config-defaults.yaml
-    name: model-serving-config-defaults
+- files:
+  - config-defaults.yaml
+  name: model-serving-config-defaults
 
 generatorOptions:
   disableNameSuffixHash: true
 
+namespace: system
+
 transformers:
-  - metadataLabelTransformer.yaml
+- metadataLabelTransformer.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../crd
-  - ../manager
-  - ../webhook
-  - ../certmanager
+- ../crd
+- ../manager
+- ../webhook
+- ../certmanager
 
 patches:
-  - path: manager_webhook_patch.yaml
-  - path: webhookcainjection_patch.yaml
+- path: manager_webhook_patch.yaml
+- path: webhookcainjection_patch.yaml
+
+replacements:
+- source:
+    fieldPath: metadata.namespace
+    kind: Certificate
+    name: modelmesh-webhook-server-cert
+  targets:
+  - fieldPaths:
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: /
+    select:
+      kind: ValidatingWebhookConfiguration
+- source:
+    kind: Certificate
+    name: modelmesh-webhook-server-cert
+  targets:
+  - fieldPaths:
+    - metadata.annotations.[cert-manager.io/inject-ca-from]
+    options:
+      delimiter: /
+      index: 1
+    select:
+      kind: ValidatingWebhookConfiguration
+- source:
+    kind: Service
+    name: modelmesh-webhook-server-service
+  targets:
+  - fieldPaths:
+    - spec.dnsNames.*
+    options:
+      delimiter: .
+    select:
+      group: cert-manager.io
+      kind: Certificate
+      name: modelmesh-webhook-server-cert
+      namespace: system
+      version: v1
+- source:
+    fieldPath: metadata.namespace
+    kind: Service
+    name: modelmesh-webhook-server-service
+  targets:
+  - fieldPaths:
+    - spec.dnsNames.*
+    options:
+      delimiter: .
+      index: 1
+    select:
+      group: cert-manager.io
+      kind: Certificate
+      name: modelmesh-webhook-server-cert
+      namespace: system
+      version: v1
