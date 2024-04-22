@@ -5,8 +5,11 @@ kind: Kustomization
 namespace: kserve
 
 # Add recommended Kubernetes labels
-commonLabels:
-  app.kubernetes.io/part-of: kserve
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: kserve
+    includeTemplates: true
+    includeSelectors: true
 
 # Labels to add to all resources and selectors.
 #commonLabels:

@@ -7,7 +7,7 @@ data:
   explainers: "{}"
   storageInitializer: |-
     {
-        "image" : "$(kserve-storage-initializer)",
+        "image" : "kserve-storage-initializer_PLACEHOLDER",
         "memoryRequest": "100Mi",
         "memoryLimit": "1Gi",
         "cpuRequest": "100m",
@@ -29,7 +29,7 @@ data:
     }
   logger: |-
     {
-        "image" : "$(kserve-agent)",
+        "image" : "kserve-agent_PLACEHOLDER",
         "memoryRequest": "100Mi",
         "memoryLimit": "1Gi",
         "cpuRequest": "100m",
@@ -38,7 +38,7 @@ data:
     }
   batcher: |-
     {
-        "image" : "$(kserve-agent)",
+        "image" : "kserve-agent_PLACEHOLDER",
         "memoryRequest": "1Gi",
         "memoryLimit": "1Gi",
         "cpuRequest": "1",
@@ -46,7 +46,7 @@ data:
     }
   agent: |-
     {
-        "image" : "$(kserve-agent)",
+        "image" : "kserve-agent_PLACEHOLDER",
         "memoryRequest": "100Mi",
         "memoryLimit": "1Gi",
         "cpuRequest": "100m",
@@ -54,7 +54,7 @@ data:
     }
   router: |-
     {
-        "image" : "$(kserve-router)",
+        "image" : "kserve-router_PLACEHOLDER",
         "memoryRequest": "100Mi",
         "memoryLimit": "1Gi",
         "cpuRequest": "100m",
