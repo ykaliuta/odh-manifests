@@ -9,15 +9,16 @@ namespace: opendatahub
 namePrefix: codeflare-operator-
 
 # Labels to add to all resources and selectors.
-commonLabels:
-  app.kubernetes.io/name: codeflare-operator
-  app.kubernetes.io/part-of: codeflare
+labels:
+  - pairs:
+      app.kubernetes.io/name: codeflare-operator
+      app.kubernetes.io/part-of: codeflare
+    includeSelectors: true
+    includeTemplates: true
 
-bases:
+resources:
 - ../rbac
 - ../manager
 # [PROMETHEUS] To enable prometheus monitor, uncomment all sections with 'PROMETHEUS'.
 # - ../prometheus
-
-resources:
 - metrics_service.yaml
