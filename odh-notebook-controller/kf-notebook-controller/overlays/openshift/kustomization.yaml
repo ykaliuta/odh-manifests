@@ -4,10 +4,13 @@ kind: Kustomization
 resources:
   - ../../base
 namespace: opendatahub
-commonLabels:
-  app.kubernetes.io/part-of: odh-notebook-controller
-  component.opendatahub.io/name: kf-notebook-controller
-  opendatahub.io/component: "true"
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: odh-notebook-controller
+      component.opendatahub.io/name: kf-notebook-controller
+      opendatahub.io/component: "true"
+    includeSelectors: true
+    includeTemplates: true
 images:
   - name: docker.io/kubeflownotebookswg/notebook-controller
     newName: quay.io/opendatahub/kubeflow-notebook-controller
@@ -18,7 +21,7 @@ configMapGenerator:
     literals:
       - USE_ISTIO=false
       - ADD_FSGROUP=false
-patchesStrategicMerge:
-  - remove_namespace_patch.yaml
-  - manager_openshift_patch.yaml
-  - manager_service_openshift_patch.yaml
+patches:
+  - path: remove_namespace_patch.yaml
+  - path: manager_openshift_patch.yaml
+  - path: manager_service_openshift_patch.yaml
