@@ -7,5 +7,5 @@ resources:
   - ./role_apps_metrics_access.yaml
   - ./user_cluster_roles.yaml
 
-patchesStrategicMerge:
-  - remove_networkpolicy_rumtime_patch.yaml
+patches:
+  - path: remove_networkpolicy_rumtime_patch.yaml

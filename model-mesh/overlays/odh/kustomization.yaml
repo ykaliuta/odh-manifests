@@ -54,12 +54,15 @@ vars:
       kind: ConfigMap
       name: mesh-parameters
 
-commonLabels:
-  app: model-mesh
-  app.kubernetes.io/part-of: model-mesh
+labels:
+  - pairs:
+      app: model-mesh
+      app.kubernetes.io/part-of: model-mesh
+    includeSelectors: true
+    includeTemplates: true
 
-patchesStrategicMerge:
-  - ./crd/clusterservingruntime_patch_delete.yaml
+patches:
+  - path: ./crd/clusterservingruntime_patch_delete.yaml
 
 configurations:
   - params.yaml
