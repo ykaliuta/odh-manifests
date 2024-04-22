@@ -140,7 +140,7 @@ kind: ServiceAccount
 metadata:
   labels:
   name: etcd-serviceaccount
-  namespace: $(mesh-namespace)
+  namespace: mesh-namespace_PLACEHOLDER
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -172,4 +172,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: etcd-serviceaccount
-    namespace: $(mesh-namespace)
+    namespace: mesh-namespace_PLACEHOLDER

@@ -17,7 +17,7 @@
 podsPerRuntime: 2
 headlessService: true
 modelMeshImage:
-  name: $(odh-modelmesh)
+  name: "ODH-MODELMESH_placeholder"
 modelMeshResources:
   requests:
     cpu: "300m"
@@ -29,7 +29,7 @@ restProxy:
   enabled: true
   port: 8008
   image:
-    name: $(odh-mm-rest-proxy)
+    name: "ODH-MM-REST-PROXY_placeholder"
   resources:
     requests:
       cpu: "50m"
@@ -38,7 +38,7 @@ restProxy:
       cpu: "1"
       memory: "512Mi"
 storageHelperImage:
-  name: $(odh-modelmesh-runtime-adapter)
+  name: "ODH-MODELMESH-RUNTIME-ADAPTER_placeholder"
   command: ["/opt/app/puller"]
 storageHelperResources:
   requests:

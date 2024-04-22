@@ -16,43 +16,79 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true
 
-
-vars:
-  - fieldref:
-      fieldPath: metadata.namespace
-    name: mesh-namespace
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: mesh-parameters
-  - fieldref:
-      fieldPath: data.odh-modelmesh
-    name: odh-modelmesh
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: mesh-parameters
-  - fieldref:
-      fieldPath: data.odh-mm-rest-proxy
-    name: odh-mm-rest-proxy
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: mesh-parameters
-  - fieldref:
-      fieldPath: data.odh-modelmesh-runtime-adapter
-    name: odh-modelmesh-runtime-adapter
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: mesh-parameters
-  - fieldref:
-      fieldPath: data.odh-modelmesh-controller
-    name: odh-modelmesh-controller
-    objref:
-      apiVersion: v1
-      kind: ConfigMap
-      name: mesh-parameters
+replacements:
+- source:
+    fieldPath: metadata.namespace
+    kind: ConfigMap
+    name: mesh-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - metadata.namespace
+    select:
+      kind: ServiceAccount
+      name: etcd-serviceaccount
+      version: v1
+  - fieldPaths:
+    - subjects.*.namespace
+    select:
+      group: rbac.authorization.k8s.io
+      kind: ClusterRoleBinding
+      name: etcd-clusterrolebinding
+      version: v1
+- source:
+    fieldPath: data.odh-modelmesh
+    kind: ConfigMap
+    name: mesh-parameters
+    version: v1
+  targets:
+    - select:
+        kind: ConfigMap
+        name: model-serving-config-defaults
+      fieldPaths:
+        - data.[config-defaults.yaml]
+      options:
+        delimiter: '"'
+        index: 5
+- source:
+    fieldPath: data.odh-mm-rest-proxy
+    kind: ConfigMap
+    name: mesh-parameters
+    version: v1
+  targets:
+    - select:
+        kind: ConfigMap
+        name: model-serving-config-defaults
+      fieldPaths:
+        - data.[config-defaults.yaml]
+      options:
+        delimiter: '"'
+        index: 15
+- source:
+    fieldPath: data.odh-modelmesh-runtime-adapter
+    kind: ConfigMap
+    name: mesh-parameters
+    version: v1
+  targets:
+    - select:
+        kind: ConfigMap
+        name: model-serving-config-defaults
+      fieldPaths:
+        - data.[config-defaults.yaml]
+      options:
+        delimiter: '"'
+        index: 25
+- source:
+    fieldPath: data.odh-modelmesh-controller
+    kind: ConfigMap
+    name: mesh-parameters
+    version: v1
+  targets:
+    - select:
+        kind: Deployment
+        name: modelmesh-controller
+      fieldPaths:
+        - spec.template.spec.containers.0.image
 
 labels:
   - pairs:
@@ -64,5 +100,3 @@ labels:
 patches:
   - path: ./crd/clusterservingruntime_patch_delete.yaml
 
-configurations:
-  - params.yaml

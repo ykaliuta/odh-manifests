@@ -17,9 +17,6 @@ generatorOptions:
 transformers:
   - metadataLabelTransformer.yaml
 
-configurations:
-  - params.yaml
-
 patches:
   # Since OpenShift serving-certificates are being used,
   # remove CA bundle placeholders
