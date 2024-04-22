@@ -78,13 +78,17 @@ configMapGenerator:
   env: params.env
 generatorOptions:
   disableNameSuffixHash: true
-vars:
-- name: odh-dashboard-image
-  objref:
+replacements:
+- source:
+    fieldPath: data.odh-dashboard-image
     kind: ConfigMap
     name: odh-dashboard-image-parameters
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.odh-dashboard-image
-configurations:
-- params.yaml
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.image
+    select:
+      group: apps
+      kind: Deployment
+      name: odh-dashboard
+      version: v1
