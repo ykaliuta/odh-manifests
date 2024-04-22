@@ -11,18 +11,29 @@ configMapGenerator:
 configurations:
   - params.yaml
 
-vars:
-- name: namespace
-  objref:
+replacements:
+- source:
+    fieldPath: data.namespace
     kind: ConfigMap
     name: stack-config
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.namespace
-- name: codeflare_operator_controller_image
-  objref:
+    version: v1
+  targets:
+    - fieldPaths:
+        - metadata.namespace
+      select: {}
+      options:
+        create: true
+- source:
+    fieldPath: data.codeflare-operator-controller-image
     kind: ConfigMap
     name: stack-config
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.codeflare-operator-controller-image
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.image
+    select:
+      group: apps
+      kind: Deployment
+      name: manager
+      namespace: system
+      version: v1
