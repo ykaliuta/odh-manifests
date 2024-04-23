@@ -20,10 +20,10 @@ spec:
         opendatahub.io/notebook-python-dependencies: '[{"name":"code-server","version":"4.22"}]'
         openshift.io/imported-from: quay.io/opendatahub/workbench-images
         opendatahub.io/workbench-image-recommended: 'true'
-        opendatahub.io/notebook-build-commit: $(odh-codeserver-notebook-image-commit-n)
+        opendatahub.io/notebook-build-commit: odh-codeserver-notebook-image-commit-n_PLACEHOLDER
       from:
         kind: DockerImage
-        name: $(odh-codeserver-notebook-n)
+        name: odh-codeserver-notebook-n_PLACEHOLDER
       name: "2024.1"
       referencePolicy:
         type: Source
@@ -33,10 +33,10 @@ spec:
         opendatahub.io/notebook-python-dependencies: '[{"name":"code-server","version":"4.16"}]'
         openshift.io/imported-from: quay.io/opendatahub/workbench-images
         opendatahub.io/workbench-image-recommended: 'false'
-        opendatahub.io/notebook-build-commit: $(odh-codeserver-notebook-image-commit-n-1)
+        opendatahub.io/notebook-build-commit: odh-codeserver-notebook-image-commit-n-1_PLACEHOLDER
       from:
         kind: DockerImage
-        name: $(odh-codeserver-notebook-n-1)
+        name: odh-codeserver-notebook-n-1_PLACEHOLDER
       name: "2023.2"
       referencePolicy:
         type: Source
