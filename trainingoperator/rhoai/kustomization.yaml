@@ -15,22 +15,28 @@ configMapGenerator:
   envs:
     - params.env
 
-configurations:
-  - params.yaml
-
-vars:
-- name: image
-  objref:
+replacements:
+- source:
+    fieldPath: data.odh-training-operator-controller-image
     kind: ConfigMap
     name: rhoai-config
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.odh-training-operator-controller-image
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.image
+    select:
+      group: apps
+      kind: Deployment
+      name: training-operator
+      version: v1
 
 # Labels to add to all resources and selectors.
-commonLabels:
-  app.kubernetes.io/name: training-operator
-  app.kubernetes.io/component: controller
+labels:
+  - pairs:
+      app.kubernetes.io/name: training-operator
+      app.kubernetes.io/component: controller
+    includeSelectors: true
+    includeTemplates: true
 
 resources:
 - ../base
