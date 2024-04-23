@@ -13,9 +13,12 @@ resources:
   - rstudio-buildconfig.yaml
   - cuda-rstudio-buildconfig.yaml
 
-commonLabels:
-  opendatahub.io/component: "true"
-  component.opendatahub.io/name: notebooks
+labels:
+  - pairs:
+      opendatahub.io/component: "true"
+      component.opendatahub.io/name: notebooks
+    includeSelectors: true
+    includeTemplates: true
 
 configMapGenerator:
   - name: notebooks-parameters

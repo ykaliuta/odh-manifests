@@ -5,6 +5,9 @@ kind: Kustomization
 resources:
   - ../../base
 
-commonLabels:
-  opendatahub.io/component: "true"
-  component.opendatahub.io/name: notebooks
+labels:
+  - pairs:
+      opendatahub.io/component: "true"
+      component.opendatahub.io/name: notebooks
+    includeSelectors: true
+    includeTemplates: true
