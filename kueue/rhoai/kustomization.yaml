@@ -15,17 +15,20 @@ configMapGenerator:
   envs:
     - params.env
 
-configurations:
-  - params.yaml
-
-vars:
-- name: image
-  objref:
+replacements:
+- source:
+    fieldPath: data.odh-kueue-controller-image
     kind: ConfigMap
     name: rhoai-config
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.odh-kueue-controller-image
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.image
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      version: v1
 
 # Labels to add to all resources and selectors.
 labels:
