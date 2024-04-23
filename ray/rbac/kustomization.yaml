@@ -7,6 +7,9 @@ resources:
 - service_account.yaml
 - viewer_role.yaml
 
-commonLabels:
-  app.kubernetes.io/name: kuberay
-  app.kubernetes.io/component: kuberay-operator
+labels:
+  - pairs:
+      app.kubernetes.io/name: kuberay
+      app.kubernetes.io/component: kuberay-operator
+    includeSelectors: true
+    includeTemplates: true

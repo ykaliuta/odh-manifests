@@ -9,10 +9,9 @@ namespace: ray-system
 #namePrefix: ray-operator-
 
 # Labels to add to all resources and selectors.
-#commonLabels:
-#  someName: someValue
+#labels:
 
-bases:
+resources:
 - ../crd
 - ../rbac
 - ../manager

@@ -4,6 +4,9 @@ resources:
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-commonLabels:
-  app.kubernetes.io/component: kuberay-operator
-  app.kubernetes.io/name: kuberay
+labels:
+  - pairs:
+      app.kubernetes.io/component: kuberay-operator
+      app.kubernetes.io/name: kuberay
+    includeSelectors: true
+    includeTemplates: true

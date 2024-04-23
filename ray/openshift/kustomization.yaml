@@ -8,38 +8,50 @@ configMapGenerator:
   envs:
     - params.env
 
-configurations:
-  - params.yaml
-
-vars:
-- name: namespace
-  objref:
-    kind: ConfigMap
-    name: ray-config
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.namespace
-- name: image
-  objref:
-    kind: ConfigMap
-    name: ray-config
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.odh-kuberay-operator-controller-image
+replacements:
+  - source:
+      kind: ConfigMap
+      name: ray-config
+      version: v1
+      fieldPath: data.namespace
+    targets:
+      - fieldPaths:
+          - metadata.namespace
+        select: {}
+        options:
+          create: true
+      - select:
+          kind: SecurityContextConstraints
+          group: security.openshift.io
+          version: v1
+        fieldPaths:
+          - users.*
+        options:
+          delimiter: ':'
+          index: 2
+  - source:
+      kind: ConfigMap
+      name: ray-config
+      version: v1
+      fieldPath: data.odh-kuberay-operator-controller-image
+    targets:
+      - select:
+          group: apps
+          kind: Deployment
+          name: kuberay-operator
+        fieldPaths:
+          - spec.template.spec.containers.0.image
 
 resources:
 - ray_operator_scc.yaml
 - ../default
 
-commonLabels:
-  app.kubernetes.io/name: kuberay
-  app.kubernetes.io/component: kuberay-operator
+labels:
+  - pairs:
+      app.kubernetes.io/name: kuberay
+      app.kubernetes.io/component: kuberay-operator
+    includeSelectors: true
+    includeTemplates: true
 
 patches:
 - path: remove_default_namespace.yaml
-- path: kuberay-operator-image-patch.yaml
-  target:
-    group: apps
-    version: v1
-    kind: Deployment
-    name: kuberay-operator
