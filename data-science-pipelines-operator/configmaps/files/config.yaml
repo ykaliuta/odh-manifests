@@ -1,30 +1,30 @@
 Images:
-  ApiServer: $(IMAGES_APISERVER)
-  Artifact: $(IMAGES_ARTIFACT)
-  OAuthProxy: $(IMAGES_OAUTHPROXY)
-  PersistentAgent: $(IMAGES_PERSISTENTAGENT)
-  ScheduledWorkflow: $(IMAGES_SCHEDULEDWORKFLOW)
-  Cache: $(IMAGES_CACHE)
-  MoveResultsImage: $(IMAGES_MOVERESULTSIMAGE)
-  MariaDB: $(IMAGES_MARIADB)
-  MlmdEnvoy: $(IMAGES_MLMDENVOY)
-  MlmdGRPC: $(IMAGES_MLMDGRPC)
-  MlmdWriter: $(IMAGES_MLMDWRITER)
+  ApiServer: "IMAGES_APISERVER_placeholder"
+  Artifact: "IMAGES_ARTIFACT_placeholder"
+  OAuthProxy: "IMAGES_OAUTHPROXY_placeholder"
+  PersistentAgent: "IMAGES_PERSISTENTAGENT_placeholder"
+  ScheduledWorkflow: "IMAGES_SCHEDULEDWORKFLOW_placeholder"
+  Cache: "IMAGES_CACHE_placeholder"
+  MoveResultsImage: "IMAGES_MOVERESULTSIMAGE_placeholder"
+  MariaDB: "IMAGES_MARIADB_placeholder"
+  MlmdEnvoy: "IMAGES_MLMDENVOY_placeholder"
+  MlmdGRPC: "IMAGES_MLMDGRPC_placeholder"
+  MlmdWriter: "IMAGES_MLMDWRITER_placeholder"
 ImagesV2:
   Argo:
-    ApiServer: $(IMAGESV2_ARGO_APISERVER)
-    PersistentAgent: $(IMAGESV2_ARGO_PERSISTENCEAGENT)
-    ScheduledWorkflow: $(IMAGESV2_ARGO_SCHEDULEDWORKFLOW)
-    MlmdEnvoy: $(IMAGESV2_ARGO_MLMDENVOY)
-    MlmdGRPC: $(IMAGESV2_ARGO_MLMDGRPC)
-    WorkflowController: $(IMAGESV2_ARGO_WORKFLOWCONTROLLER)
-    ArgoExecImage: $(IMAGESV2_ARGO_ARGOEXEC)
-    ArgoLauncherImage: $(V2_LAUNCHER_IMAGE)
-    ArgoDriverImage: $(V2_DRIVER_IMAGE)
+    ApiServer: "IMAGESV2_ARGO_APISERVER_placeholder"
+    PersistentAgent: "IMAGESV2_ARGO_PERSISTENCEAGENT_placeholder"
+    ScheduledWorkflow: "IMAGESV2_ARGO_SCHEDULEDWORKFLOW_placeholder"
+    MlmdEnvoy: "IMAGESV2_ARGO_MLMDENVOY_placeholder"
+    MlmdGRPC: "IMAGESV2_ARGO_MLMDGRPC_placeholder"
+    WorkflowController: "IMAGESV2_ARGO_WORKFLOWCONTROLLER_placeholder"
+    ArgoExecImage: "IMAGESV2_ARGO_ARGOEXEC_placeholder"
+    ArgoLauncherImage: "V2_LAUNCHER_IMAGE_placeholder"
+    ArgoDriverImage: "V2_DRIVER_IMAGE_placeholder"
 DSPO:
   HealthCheck:
     Database:
-      ConnectionTimeout: $(DSPO_HEALTHCHECK_DATABASE_CONNECTIONTIMEOUT)
+      ConnectionTimeout: "DSPO_HEALTHCHECK_DATABASE_CONNECTIONTIMEOUT_placeholder"
     ObjectStore:
-      ConnectionTimeout: $(DSPO_HEALTHCHECK_OBJECTSTORE_CONNECTIONTIMEOUT)
-  RequeueTime: $(DSPO_REQUEUE_TIME)
+      ConnectionTimeout: "DSPO_HEALTHCHECK_OBJECTSTORE_CONNECTIONTIMEOUT_placeholder"
+  RequeueTime: "DSPO_REQUEUE_TIME_placeholder"

@@ -16,188 +16,559 @@ configMapGenerator:
   - name: dspo-parameters
     envs:
       - params.env
-vars:
-  - name: IMAGES_APISERVER
-    objref:
+
+replacements:
+- source:
+    fieldPath: data.IMAGES_APISERVER
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_APISERVER].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_APISERVER
-  - name: IMAGES_ARTIFACT
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 1
+- source:
+    fieldPath: data.IMAGES_ARTIFACT
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_ARTIFACT].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_ARTIFACT
-  - name: IMAGES_OAUTHPROXY
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 3
+- source:
+    fieldPath: data.IMAGES_OAUTHPROXY
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_OAUTHPROXY].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_OAUTHPROXY
-  - name: IMAGES_PERSISTENTAGENT
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 5
+- source:
+    fieldPath: data.IMAGES_PERSISTENTAGENT
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_PERSISTENTAGENT].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_PERSISTENTAGENT
-  - name: IMAGES_SCHEDULEDWORKFLOW
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 7
+- source:
+    fieldPath: data.IMAGES_SCHEDULEDWORKFLOW
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_SCHEDULEDWORKFLOW].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_SCHEDULEDWORKFLOW
-  - name: IMAGES_CACHE
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 9
+- source:
+    fieldPath: data.IMAGES_CACHE
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_CACHE].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_CACHE
-  - name: IMAGES_MOVERESULTSIMAGE
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 11
+- source:
+    fieldPath: data.IMAGES_MOVERESULTSIMAGE
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_MOVERESULTSIMAGE].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_MOVERESULTSIMAGE
-  - name: IMAGES_MARIADB
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 13
+- source:
+    fieldPath: data.IMAGES_MARIADB
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_MARIADB].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_MARIADB
-  - name: IMAGES_MLMDENVOY
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 15
+- source:
+    fieldPath: data.IMAGES_MLMDENVOY
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_MLMDENVOY].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_MLMDENVOY
-  - name: IMAGES_MLMDGRPC
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 17
+- source:
+    fieldPath: data.IMAGES_MLMDGRPC
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_MLMDGRPC].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_MLMDGRPC
-  - name: IMAGES_MLMDWRITER
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 19
+- source:
+    fieldPath: data.IMAGES_MLMDWRITER
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGES_MLMDWRITER].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_MLMDWRITER
-  - name: IMAGES_DSPO
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 21
+- source:
+    fieldPath: data.IMAGESV2_ARGO_APISERVER
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGESV2_ARGO_APISERVER].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGES_DSPO
-  - name: ZAP_LOG_LEVEL
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 23
+- source:
+    fieldPath: data.IMAGESV2_ARGO_PERSISTENCEAGENT
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGESV2_ARGO_PERSISTENCEAGENT].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.ZAP_LOG_LEVEL
-  - name: DSPO_REQUEUE_TIME
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 25
+- source:
+    fieldPath: data.IMAGESV2_ARGO_SCHEDULEDWORKFLOW
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGESV2_ARGO_SCHEDULEDWORKFLOW].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.DSPO_REQUEUE_TIME
-  - name: MAX_CONCURRENT_RECONCILES
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 27
+- source:
+    fieldPath: data.IMAGESV2_ARGO_MLMDENVOY
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGESV2_ARGO_MLMDENVOY].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.MAX_CONCURRENT_RECONCILES
-  - name: DSPO_HEALTHCHECK_DATABASE_CONNECTIONTIMEOUT
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 29
+- source:
+    fieldPath: data.IMAGESV2_ARGO_MLMDGRPC
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGESV2_ARGO_MLMDGRPC].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.DSPO_HEALTHCHECK_DATABASE_CONNECTIONTIMEOUT
-  - name: DSPO_HEALTHCHECK_OBJECTSTORE_CONNECTIONTIMEOUT
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 31
+- source:
+    fieldPath: data.IMAGESV2_ARGO_WORKFLOWCONTROLLER
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGESV2_ARGO_WORKFLOWCONTROLLER].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.DSPO_HEALTHCHECK_OBJECTSTORE_CONNECTIONTIMEOUT
-  - name: IMAGESV2_ARGO_APISERVER
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 33
+- source:
+    fieldPath: data.IMAGESV2_ARGO_ARGOEXEC
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=IMAGESV2_ARGO_ARGOEXEC].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGESV2_ARGO_APISERVER
-  - name: IMAGESV2_ARGO_PERSISTENCEAGENT
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 35
+- source:
+    fieldPath: data.V2_LAUNCHER_IMAGE
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=V2_LAUNCHER_IMAGE].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGESV2_ARGO_PERSISTENCEAGENT
-  - name: IMAGESV2_ARGO_SCHEDULEDWORKFLOW
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 37
+- source:
+    fieldPath: data.V2_DRIVER_IMAGE
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=V2_DRIVER_IMAGE].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGESV2_ARGO_SCHEDULEDWORKFLOW
-  - name: IMAGESV2_ARGO_MLMDENVOY
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 39
+- source:
+    fieldPath: data.DSPO_REQUEUE_TIME
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=DSPO_REQUEUE_TIME].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGESV2_ARGO_MLMDENVOY
-  - name: IMAGESV2_ARGO_MLMDGRPC
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 45
+- source:
+    fieldPath: data.DSPO_HEALTHCHECK_DATABASE_CONNECTIONTIMEOUT
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGESV2_ARGO_MLMDGRPC
-  - name: IMAGESV2_ARGO_ARGOEXEC
-    objref:
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 41
+- source:
+    fieldPath: data.DSPO_HEALTHCHECK_OBJECTSTORE_CONNECTIONTIMEOUT
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - select:
       kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGESV2_ARGO_ARGOEXEC
-  - name: IMAGESV2_ARGO_WORKFLOWCONTROLLER
-    objref:
-      kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.IMAGESV2_ARGO_WORKFLOWCONTROLLER
-  - name: V2_LAUNCHER_IMAGE
-    objref:
-      kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.V2_LAUNCHER_IMAGE
-  - name: V2_DRIVER_IMAGE
-    objref:
-      kind: ConfigMap
-      name: dspo-parameters
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.V2_DRIVER_IMAGE
-configurations:
-  - params.yaml
+      name: dspo-config
+    fieldPaths:
+      - data.[config.yaml]
+    options:
+      delimiter: '"'
+      index: 43
+- source:
+    fieldPath: data.ZAP_LOG_LEVEL
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.args.1
+    options:
+      delimiter: '='
+      index: 1
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=ZAP_LOG_LEVEL].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+- source:
+    fieldPath: data.MAX_CONCURRENT_RECONCILES
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.args.2
+    options:
+      delimiter: '='
+      index: 1
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+  - fieldPaths:
+    - spec.template.spec.containers.*.env.[name=MAX_CONCURRENT_RECONCILES].value
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
+- source:
+    fieldPath: data.IMAGES_DSPO
+    kind: ConfigMap
+    name: dspo-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.image
+    select:
+      group: apps
+      kind: Deployment
+      name: controller-manager
+      namespace: datasciencepipelinesapplications-controller
+      version: v1
