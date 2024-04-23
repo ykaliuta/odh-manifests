@@ -8,6 +8,9 @@ resources:
   - jupyter-intel-pytorch-notebook-imagestream.yaml
   - jupyter-intel-tensorflow-notebook-imagestream.yaml
 
-commonLabels:
-  opendatahub.io/component: "true"
-  component.opendatahub.io/name: notebooks
+labels:
+  - pairs:
+      opendatahub.io/component: "true"
+      component.opendatahub.io/name: notebooks
+    includeSelectors: true
+    includeTemplates: true
