@@ -20,10 +20,10 @@ spec:
         opendatahub.io/notebook-python-dependencies: '[{"name":"code-server","version":"4.16"}]'
         openshift.io/imported-from: quay.io/modh/codeserver
         opendatahub.io/workbench-image-recommended: 'true'
-        opendatahub.io/notebook-build-commit: $(odh-codeserver-notebook-image-commit-n)
+        opendatahub.io/notebook-build-commit: odh-codeserver-notebook-image-commit-n_PLACEHOLDER
       from:
         kind: DockerImage
-        name: $(odh-codeserver-notebook-n)
+        name: odh-codeserver-notebook-n_PLACEHOLDER
       name: "2023.2"
       referencePolicy:
         type: Source
